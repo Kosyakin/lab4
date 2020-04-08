@@ -1,4 +1,5 @@
-#include "pch.h"
+//#include "pch.h"
+#include <cmath>
 #include <iostream>
 #include <fstream>
 using namespace std;
