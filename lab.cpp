@@ -53,11 +53,11 @@ void Print(double ** M, int n, int m, double *f) {
 
 		for (int j = 0; j < m; ++j) {
 			if (M[i][j] != 0) {
-				cout << M[i][j] << "*x" << j + 1 << "  +  ";
+				//cout << M[i][j] << "*x" << j + 1 << "  +  ";
 			}
 		}
 		f[i] = i + 1;
-		cout << "=" << f[i] << endl;
+		//cout << "=" << f[i] << endl;
 	}
 }
 
