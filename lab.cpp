@@ -28,7 +28,7 @@ void Input(double **M, int n, int m) {
 	for (int i = 0; i < n; i++) {
 
 		for (int j = 0; j < m; j++) {
-			double c = 1.0 + j;
+			
 
 			if (i == j) {
 				M[i][j] = 10;
@@ -37,7 +37,7 @@ void Input(double **M, int n, int m) {
 				M[i][j] = 0;
 			}
 			else {
-				M[i][j] = 1 / c;
+				M[i][j] = 1 / (i+1);
 			}
 
 		}
