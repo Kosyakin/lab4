@@ -29,7 +29,7 @@ void Input(double **M, int n, int m) {
 	for (int i = 0; i < n; i++) {
 
 		for (int j = 0; j < m; j++) {
-			
+
 
 			if (i == j) {
 				M[i][j] = 10;
@@ -38,7 +38,7 @@ void Input(double **M, int n, int m) {
 				M[i][j] = 0;
 			}
 			else {
-				M[i][j] = 1 / (i+1);
+				M[i][j] = 1 / (i + 1);
 			}
 
 		}
@@ -146,7 +146,7 @@ void Jacobi(int n, double** M)
 
 	do {
 		for (int i = 0; i < n; i++) {
-			TempX[i] = F[i]/10;
+			TempX[i] = F[i] / 10;
 			for (int g = 0; g < n; g++) {
 				if (i != g)
 					TempX[i] -= M[i][g] * X[g];
@@ -164,16 +164,19 @@ void Jacobi(int n, double** M)
 
 	cout << endl << "Metod Jacobi" << endl;
 	ofstream out("ans2.dat");
-	
+
 	for (int i = 0;i < 100;i++) {
 		cout << TempX[i] << endl;
-		out	 << TempX[i] << endl;
-	
+		out << TempX[i] << endl;
+
 	}
-	cout << "norma vectora nevyazki"<<endl;
-		for (int i = 0;i < 100;i++) {
-			cout << i + 1 - TempX[i] * 10 << endl;
-		}
+	double a = 0;
+	cout << "norma vectora nevyazki:" << endl;
+	for (int i = 0;i < 100;i++) {
+		a += i + 1 - TempX[i] * 10;
+
+	}
+	cout << a << endl;
 	out.close();
 	delete[] TempX;
 }
@@ -181,6 +184,7 @@ void Jacobi(int n, double** M)
 int main()
 {
 	double *x;
+
 	
 	int n;
 	int m;
@@ -201,17 +205,18 @@ int main()
 
 	cout << endl << "Metod Gaussa" << endl;
 	ofstream out("ans1.dat");
-		for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 
-			cout << x[i] << endl;
-			out << x[i] << endl;
-		}
-		cout << "norma vectora nevyazki"<<endl;
-		for (int i = 0;i < 100;i++) {
-			cout << i + 1 - x[i] * 10 << endl;
-		}
+		cout << x[i] << endl;
+		out << x[i] << endl;
+	}
+	double a=0;
+	cout << "norma vectora nevyazki:" << endl;
+	for (int i = 0;i < 100;i++) {
+		a+=i + 1 - x[i] * 10;
+	}
 	out.close();
-
+	cout << a << endl;
 	Jacobi(n, A);
 
 	cin.get();
