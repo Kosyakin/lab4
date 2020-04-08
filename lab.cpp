@@ -169,7 +169,7 @@ void Jacobi(int n, double** M)
 		out	 << TempX[i] << endl;
 	
 	}
-	cout << "норма векторов невязки";
+	cout << "norma vectora nevyazki";
 		for (int i = 0;i < 100;i++) {
 			cout << i + 1 - TempX[i] * 10 << endl;
 		}
@@ -206,7 +206,7 @@ int main()
 			cout << x[i] << endl;
 			out << x[i] << endl;
 		}
-		cout << "норма векторов невязки";
+		cout << "norma vectora nevyazki";
 		for (int i = 0;i < 100;i++) {
 			cout << i + 1 - x[i] * 10 << endl;
 		}
