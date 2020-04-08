@@ -30,7 +30,7 @@ void Input(double **M, int n, int m) {
 
 		for (int j = 0; j < m; j++) {
 
-
+			double c = i + 1;
 			if (i == j) {
 				M[i][j] = 10;
 			}
@@ -38,7 +38,7 @@ void Input(double **M, int n, int m) {
 				M[i][j] = 0;
 			}
 			else {
-				M[i][j] = 1 / (i + 1);
+				M[i][j] = 1 / c;
 			}
 
 		}
@@ -53,11 +53,11 @@ void Print(double ** M, int n, int m, double *f) {
 
 		for (int j = 0; j < m; ++j) {
 			if (M[i][j] != 0) {
-				//cout << M[i][j] << "*x" << j + 1 << "  +  ";
+				cout << M[i][j] << "*x" << j + 1 << "  +  ";
 			}
 		}
 		f[i] = i + 1;
-		//cout << "=" << f[i] << endl;
+		cout << "=" << f[i] << endl;
 	}
 }
 
