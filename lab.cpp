@@ -1,7 +1,4 @@
 //#include "pch.h"
-#include <cmath>
-#include <iostream>
-#include <fstream>
 using namespace std;
 // Создание матрицы
 
@@ -127,68 +124,42 @@ double *gauss(double **M, double *f, int n)
 
 
 // Метод Якоби
-
-void Jacobi(int n, double** M)
+double *Jacobi(int N, double** A, double* F, double* X)
 {
+	double* TempX = new double[N];
+	double norm; // норма, определяемая как наибольшая разность компонент столбца иксов соседних итераций.
 	const double eps = 0.0001;
-	double* TempX = new double[n];
-	double norm; //норма, определяемая как наибольшая разность компонент столбца иксов соседних итераций.
-
-
-	double* F = new double[n];
-	double* X = new double[n];
-
-	for (int i = 0;i < n;i++) {
-		F[i] = i + 1;  //Значение функции
-		X[i] = 1;  //Начальное приближение
-	}
-
-
 	do {
-		for (int i = 0; i < n; i++) {
-			TempX[i] = F[i] / 10;
-			for (int g = 0; g < n; g++) {
+		for (int i = 0; i < N; i++) {
+			TempX[i] = F[i];
+			for (int g = 0; g < N; g++) {
 				if (i != g)
-					TempX[i] -= M[i][g] * X[g];
+					TempX[i] -= A[i][g] * X[g];
 			}
-			TempX[i] /= M[i][i];
+			TempX[i] /= A[i][i];
 		}
 		norm = fabs(X[0] - TempX[0]);
-		for (int h = 0; h < n; h++) {
+		for (int h = 0; h < N; h++) {
 			if (fabs(X[h] - TempX[h]) > norm)
 				norm = fabs(X[h] - TempX[h]);
 			X[h] = TempX[h];
+		
 		}
+		
 	} while (norm > eps);
-
-
-	cout << endl << "Metod Jacobi" << endl;
-	ofstream out("ans2.dat");
-
-	for (int i = 0;i < 100;i++) {
-		cout << TempX[i] << endl;
-		out << TempX[i] << endl;
-
-	}
-	double a = 0;
-	cout << "norma vectora nevyazki:" << endl;
-	for (int i = 0;i < 100;i++) {
-		a += i + 1 - TempX[i] * 10;
-
-	}
-	cout << a << endl;
-	out.close();
 	delete[] TempX;
+	return X;
 }
+
+
+
+
+
 
 int main()
 {
 	double *x;
-
-	
-	int n;
-	int m;
-
+	int n,m;
 	n = 100;
 	m = 100;
 
@@ -200,7 +171,7 @@ int main()
 	Input(A, n, m);
 	Print(A, n, m, f);
 
-
+	/////////////Metod Gaussa
 	x = gauss(A, f, n);
 
 	cout << endl << "Metod Gaussa" << endl;
@@ -210,21 +181,37 @@ int main()
 		cout << x[i] << endl;
 		out << x[i] << endl;
 	}
-	double a=0;
-	cout << "norma vectora nevyazki:" << endl;
-	for (int i = 0;i < 100;i++) {
-		a+=i + 1 - x[i] * 10;
-	}
 	out.close();
-	cout << a << endl;
-	Jacobi(n, A);
+	
+
+
+
+	/////////////Metod Jacobi
+	double *x2;
+	x2 = new double[n];
+	cout << endl << "Metod Jacobi" << endl;
+	x2 = Jacobi(n, A, f, x2);
+	ofstream out1("ans2.dat");
+	for (int i = 0; i < n; i++) {
+
+		cout << x2[i] << endl;
+		out << x2[i] << endl;
+	}
+	out1.close();
+
+	
+
+
+
+
+
+
+
+
+
 
 	cin.get();
-
-
 	Free(A, n);
-
-
 	system("pause");
 	return 0;
 }
