@@ -130,7 +130,7 @@ double *gauss(double **M, double *f, int n)
 double *Jacobi(int N, double** A, double* F, double* X)
 {
 	double* TempX = new double[N];
-	double norm; // норма, определяемая как наибольшая разность компонент столбца иксов соседних итераций.
+	double norm; 
 	const double eps = 0.0001;
 	do {
 		for (int i = 0; i < N; i++) {
