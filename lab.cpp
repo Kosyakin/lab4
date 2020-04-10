@@ -1,7 +1,7 @@
 //#include "pch.h"
 #include <iostream>
 #include <fstream>
-#iclude <cmath>
+#include <cmath>
 using namespace std;
 // Создание матрицы
 
