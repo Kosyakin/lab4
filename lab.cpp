@@ -1,7 +1,6 @@
 //#include "pch.h"
 #include <iostream>
 #include <fstream>
-#include <cmath>
 using namespace std;
 // Создание матрицы
 
@@ -130,7 +129,7 @@ double *gauss(double **M, double *f, int n)
 double *Jacobi(int N, double** A, double* F, double* X)
 {
 	double* TempX = new double[N];
-	double norm; 
+	double norm; // норма, определяемая как наибольшая разность компонент столбца иксов соседних итераций.
 	const double eps = 0.0001;
 	do {
 		for (int i = 0; i < N; i++) {
@@ -155,10 +154,6 @@ double *Jacobi(int N, double** A, double* F, double* X)
 }
 
 
-
-
-
-
 int main()
 {
 	double *x;
@@ -170,7 +165,7 @@ int main()
 	double **A = Create(n, m);
 	double *f;
 	f = new double[n];
-
+	double F1=0;
 	Input(A, n, m);
 	Print(A, n, m, f);
 
@@ -181,14 +176,17 @@ int main()
 	ofstream out("ans1.dat");
 	for (int i = 0; i < n; i++) {
 
-		cout << x[i] << endl;
+		//cout << x[i] << endl;
 		out << x[i] << endl;
+		F1 += pow(-i - 1 +10 * x[i], 2);
+
 	}
+	cout << pow(F1,0.5) << endl;
 	out.close();
 	
 
 
-
+	F1 = 0;
 	/////////////Metod Jacobi
 	double *x2;
 	x2 = new double[n];
@@ -197,9 +195,11 @@ int main()
 	ofstream out1("ans2.dat");
 	for (int i = 0; i < n; i++) {
 
-		cout << x2[i] << endl;
+		//cout << x2[i] << endl;
 		out1 << x2[i] << endl;
+		F1 += pow(-i - 1 + 10 * x[i], 2);
 	}
+	cout << pow(F1, 0.5) << endl;
 	out1.close();
 
 	
