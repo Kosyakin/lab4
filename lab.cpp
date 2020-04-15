@@ -198,7 +198,7 @@ int main()
 	for (int i = 0; i < n; i++) {
 
 		cout << x2[i] << endl;
-		out << x2[i] << endl;
+		out1 << x2[i] << endl;
 	}
 	out1.close();
 
