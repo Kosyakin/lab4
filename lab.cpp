@@ -1,6 +1,7 @@
-//#include "pch.h"
+//include "pch.h"
 #include <iostream>
 #include <fstream>
+#include <cmath>
 using namespace std;
 // Создание матрицы
 
@@ -59,6 +60,37 @@ void Print(double ** M, int n, int m, double *f) {
 		//cout << "=" << f[i] << endl;
 	}
 }
+
+void NVN(int n, int z, double *x) {
+	
+	double **A = Create(n, n);
+	Input(A, n, n);
+
+	double* S = new double[n];
+	for (int i = 0; i < n; i++) {
+		S[i] = 0;
+		for (int j = 0; j < n; j++) {
+
+			if (A[i][j] != 0) {
+				S[i]+= A[i][j]*x[j];
+			}
+		}
+		
+		
+	}
+	for (int i = 0; i < n; i++) {
+		 S[i]=i + 1 - S[i];
+		 S[i] = S[i] / z;
+		 //cout << S[i] << endl;;
+	}
+
+	double SS=0;
+	for (int i = 0; i < n; i++) {
+		SS += S[i] * S[i];
+	}
+	cout << sqrt(SS) << endl;
+}
+
 
 
 //Метод гауса
@@ -145,9 +177,9 @@ double *Jacobi(int N, double** A, double* F, double* X)
 			if (fabs(X[h] - TempX[h]) > norm)
 				norm = fabs(X[h] - TempX[h]);
 			X[h] = TempX[h];
-		
+
 		}
-		
+
 	} while (norm > eps);
 	delete[] TempX;
 	return X;
@@ -157,7 +189,7 @@ double *Jacobi(int N, double** A, double* F, double* X)
 int main()
 {
 	double *x;
-	int n,m;
+	int n, m;
 	n = 100;
 	m = 100;
 
@@ -165,7 +197,7 @@ int main()
 	double **A = Create(n, m);
 	double *f;
 	f = new double[n];
-	double F1=0;
+	double F1 = 0;
 	Input(A, n, m);
 	Print(A, n, m, f);
 
@@ -178,12 +210,17 @@ int main()
 
 		//cout << x[i] << endl;
 		out << x[i] << endl;
-		F1 += pow(-i - 1 +10 * x[i], 2);
+	
 
 	}
-	cout << pow(F1,0.5) << endl;
+	int z = 1;
+	NVN(n, z,x);
 	out.close();
+
 	
+
+
+
 
 
 	F1 = 0;
@@ -197,12 +234,14 @@ int main()
 
 		//cout << x2[i] << endl;
 		out1 << x2[i] << endl;
-		F1 += pow(-i - 1 + 10 * x[i], 2);
-	}
-	cout << pow(F1, 0.5) << endl;
+
+	}	
+	z = 100000;
+	NVN(n, z,x2);
+
 	out1.close();
 
-	
+
 
 
 
