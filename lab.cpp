@@ -1,4 +1,4 @@
-//include "pch.h"
+//#include "pch.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -74,13 +74,12 @@ void NVN(int n, int z, double *x) {
 			if (A[i][j] != 0) {
 				S[i]+= A[i][j]*x[j];
 			}
-		}
-		
+		}		
 		
 	}
 	for (int i = 0; i < n; i++) {
 		 S[i]=i + 1 - S[i];
-		 S[i] = S[i] / z;
+		 S[i] = S[i] ;
 		 //cout << S[i] << endl;;
 	}
 
@@ -160,6 +159,7 @@ double *gauss(double **M, double *f, int n)
 // Метод Якоби
 double *Jacobi(int N, double** A, double* F, double* X)
 {
+	double S = 0;
 	double* TempX = new double[N];
 	double norm; // норма, определяемая как наибольшая разность компонент столбца иксов соседних итераций.
 	const double eps = 0.0001;
@@ -179,8 +179,11 @@ double *Jacobi(int N, double** A, double* F, double* X)
 			X[h] = TempX[h];
 
 		}
+		
 
 	} while (norm > eps);
+	cout << norm;
+	
 	delete[] TempX;
 	return X;
 }
@@ -236,8 +239,8 @@ int main()
 		out1 << x2[i] << endl;
 
 	}	
-	z = 100000;
-	NVN(n, z,x2);
+	//z = 100000;
+	//NVN(n, z,x2);
 
 	out1.close();
 
